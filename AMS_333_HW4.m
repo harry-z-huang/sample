@@ -1,5 +1,4 @@
 %Harry Huang 11/16/20
-%AMS 333 Homework 4
 
 clear
 %part (a)
