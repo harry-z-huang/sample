@@ -1,0 +1,84 @@
+---
+title: "Trail Camera Predator-Prey Ratios"
+author: "Harry Huang*, Riley McDonnell, Mesa Ashton"
+date: "April 1, 2019"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: 3
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '3'
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+#this is a code chunk
+
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=60),tidy=TRUE, echo = TRUE) #makes your text wrap around in your code chunks, essential for knitting pdfs (or text goes off the page)
+
+
+```
+
+# Goal
+The dataset used in this study is derived from visual observations of footage from trail cameras 17 and 34. The dataset is a count of predator and prey animals in two areas: open field and forest. Predator and prey animals were defined by how carnivorous each animal was, with only coyotes, dogs, and humans being predators. 
+
+The **question** is: what is the difference in predation between open areas and forested areas.
+
+The **hypothesis** is: The ratio of predator to prey animals will be higher in the forest than it will be in the open area. 
+
+The **prediction** is: If animal presence is affected by type of habitat (open or wooded), then when we capture footage from an area in between the woods and field, we will see more predators relative to prey in forested areas than in open areas. 
+
+We will use a double bar graph to visualize our data in order to interpret and compare overall animal presence in each area and also the predator:prey ratio in each area. 
+```{r ready the workspace}
+#this is a code chunk
+
+#remove old variables from your current environment 
+rm(list=ls())
+
+#check working directory and set
+getwd()
+setwd("C:\\Users\\Harry Huang\\Desktop\\BIOL208_Rlab") #CHANGE THIS TO THE PATH TO YOUR FOLDER
+getwd() #check to make sure it worked
+```
+```{r load the data}
+#this is a code chunk
+
+#read in the csv file using read.csv. Note that the filename is a character variable and must have quotes!
+TrailCamData <- read.csv("TrailCam.csv")
+TrailCamData #if loaded properly, typing this should show me the data
+
+#if this has loaded in correctly, you should also see it pop up as a variable calle iris.dataframe in the top right quadrant labeled environment. You can click on iris.dataframe in the environment quadrant and it should pop up in the top left quadrant looking like an excel spreadsheet.
+
+#load in dplyr
+library(dplyr)
+
+#what does the data look like?
+dim(TrailCamData) #gives the dimensions of the dataset (rows, columns)
+summary(TrailCamData)
+```
+#Results
+```{r}
+#double bar graph formula
+library(ggplot2)
+ggplot(TrailCamData, aes(fill=Animal, y=Number, x=Location)) + 
+    geom_bar(position="stack", stat="identity")+
+  xlab("Area") +
+  ylab("Number of Animals")+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+```
+Figure 1  Stacked bar chart of sighted predator and prey animals in forest and open areas of the Bucknell Natural Area
+
+The total number of sighted animals almost three times greater in the forest area than in the open area. The proportion of predators relative to the total sighted in each area was larger in the forest than it was in the open area (figure 1)
+
+#Discussion
+The results support the hypothesis and the ratio of predators to prey is greater in the forest area than it is in the open area. Some of the predators that patrol these areas are well adapted to hunt in forested areas, such as the Goshawk(Beier and Drennan 1997). This finding is consistent with the theory that some predators tend to occupy the areas where they are most successful in (Beier and Drennan 1997). This logic also works in the reverse direction when considering how some ungulate prey might avoid areas of high predation risk (Thaker et. al 2011). This segregation of forested and open habitat due to predation is not unlike that found in other kinds of habitat, such as with ungulates in rugged and high terrain trying to avoid predation by coyotes (Lingle, 2002). While our study considers the number of each animal type, it does not consider quality in terms of weight or other characteristics. The number of prey in the forest area was heavily supplemented by the observation of 46 European Starlings, which are animals of high fecundity and low mass/stored energy. Despite this supplement, the ratio of predator to prey was still higher in the forest area, suggesting that if the ratio was considered as a function of energy exchange, it would be even higher in the forest area than it already is. The dissimilarity beyond basal density must be considered, as the open area was further from a water source than the forest area was. Future research could address how this predator:prey ratio differs in distance from water as water is a necessary resource that can attract animals. 
+
+#Works Cited
+Beier, P. and Drennan, J.E., 1997. Forest structure and prey abundance in foraging areas of northern goshawks. Ecological Applications, 7(2), pp.564-571.
+
+Thaker, M., Vanak, A., Owen, C., Ogden, M., Niemann, S. and Slotow, R. (2011). Minimizing predation risk in a landscape of multiple predators: effects on the spatial distribution of African ungulates. Ecology, 92(2), pp.398-407.
+
+Lingle, S. (2002). Coyote Predation and Habitat Segregation of White-Tailed Deer and Mule Deer. Ecology, 83(7), p.2037.
