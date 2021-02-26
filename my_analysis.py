@@ -300,7 +300,7 @@ def main():
 
     (4) plot the yearly national matter from 2003 to 2011
 
-    (5) draw a bar plot showing the five states with the highest unintended overdose death rate for 1999 and 2017.
+    (5) plot fine particulate matter alongside national heat
 
     (9) Quit 
     ''')
