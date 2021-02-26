@@ -1,9 +1,5 @@
 1'''Harry Huang
-Due April 26, 2019 and finalized April 29, 2019
-CSCI 203: Tuesday 8-10am Talmage Lab and 11am-12pm MWF Meng Lecture
-Final Project- Part 2: 
-Integrity statement: I have read and adhered to the Academic Honesty policy
-as outline in the CSCI 203 "Course Description" document'''
+
 import numpy as np
 import matplotlib.pyplot as plt
 
